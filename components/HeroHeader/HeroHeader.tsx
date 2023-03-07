@@ -76,9 +76,15 @@ export function HeroHeader() {
               <span className={classes.highlight}>Tiago</span> <br /> Romero
             </Title>
             <Text color="dimmed" mt="md">
-              I'm a very passionate full-stack web developer with two years of experience under my
-              belt. I have worked with several technologies over the years, but by far here are my
-              top 3 picks
+              Welcome to my page!
+            </Text>
+            <Text color="dimmed" mt="md">
+              I am a skilled and experienced full-stack web developer, with a focus on delivering
+              innovative solutions to complex problems. With two years of experience in the field, I
+              have built a deep understanding of a wide range of technologies, from programming
+              languages and frameworks to cloud-based services and beyond. Throughout my
+              professional journey, I have had the opportunity to work with many different
+              technologies, but my top three picks are:
             </Text>
 
             <List
@@ -92,17 +98,23 @@ export function HeroHeader() {
               }
             >
               <List.Item>
-                <b>React.js</b> – Simply the best Javascript UI libary, been using it since i
-                started working professionally.
+                <b>React.js</b> – React.js is my go-to JavaScript UI library, and I have been using
+                it consistently since I began working professionally. Its simplicity and flexibility
+                make it the best choice for creating dynamic and responsive user interfaces that
+                meet client requirements.
               </List.Item>
               <List.Item>
-                <b>Node.js</b> – Best modern solution for building Rest API's, i use it all the time
-                along with Express.js for both work and personal projects!
+                <b>Node.js</b> – React.js is my go-to JavaScript UI library, and I have been using
+                it consistently since I began working professionally. Its simplicity and flexibility
+                make it the best choice for creating dynamic and responsive user interfaces that
+                meet client requirements.
               </List.Item>
               <List.Item>
-                <b>AWS</b> – My prediction is that all web development will be serverless in the
-                next 5 years. So, as i result, im training to become an expert on this cloud
-                provider.
+                <b>AWS</b> – As for cloud computing, AWS is my platform of choice. With its vast
+                array of services, scalable architecture, and cost-effectiveness, it has proven to
+                be a game-changer in the world of web development. I firmly believe that serverless
+                web development is the future, and as a result, I am actively training to become an
+                expert in AWS cloud computing.
               </List.Item>
             </List>
 
@@ -113,7 +125,7 @@ export function HeroHeader() {
                 className={classes.control}
                 onClick={() =>
                   window.open(
-                    'mailto:quetzaltiago@gmail.com?subject=Hello Tiago, im contacting you from your personal webiste!&body=Whatever you wanna tell me :)'
+                    'mailto:quetzaltiago@gmail.com?subject=Hello Tiago, im contacting you from your personal website!&body=Whatever you wanna tell me :)'
                   )
                 }
               >

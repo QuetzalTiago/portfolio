@@ -3,20 +3,32 @@ import { useForm } from '@mantine/form';
 import {
   TextInput,
   PasswordInput,
-  Text,
   Paper,
   Group,
   PaperProps,
   Button,
-  Divider,
   Checkbox,
   Anchor,
   Stack,
 } from '@mantine/core';
-import { FacebookButton, GithubButton, GoogleButton } from '../SocialButtons/SocialButtons';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { showNotification } from '@mantine/notifications';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export function AuthForm(props: PaperProps) {
   const [type, toggle] = useToggle(['login', 'register']);
+  const [cookie, setCookie] = useCookies(['authBearer']);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (cookie.authBearer) {
+      showNotification({ message: 'Already logged in!' });
+      // router.push('/');
+    }
+  }, []);
+
   const form = useForm({
     initialValues: {
       email: '',
@@ -26,30 +38,85 @@ export function AuthForm(props: PaperProps) {
     },
 
     validate: {
+      name: (val) =>
+        type === 'register' && val.length <= 4
+          ? 'Name is required and must include at least 4 characters'
+          : null,
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
-      password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
+      password: (val) => (val.length <= 6 ? 'Password must include at least 6 characters' : null),
     },
   });
+  const handleSubmit = async () => {
+    const { email, name, password } = form.values;
+
+    if (type === 'register') {
+      const response = await axios.post(
+        'https://rxzqfd75z4.execute-api.us-east-1.amazonaws.com/dev/register',
+        {
+          email,
+          name,
+          password,
+        }
+      );
+      console.log(response);
+
+      // Redirect to home after successful registration
+      if (response.data.statusCode === 200) {
+        showNotification({
+          message: 'Registration successful!',
+        });
+        const { jwt } = JSON.parse(response.data.body);
+        setCookie('authBearer', jwt, {
+          path: '/',
+          maxAge: 3600, // Expires after 1hr
+          sameSite: true,
+        });
+        router.push('/');
+      } else {
+        const message = response.data.body.match(/(?:"[^"]*"|^[^"]*$)/)[0].replace(/"/g, '');
+        showNotification({
+          message,
+        });
+      }
+    } else if (type === 'login') {
+      const response = await axios.post(
+        'https://rxzqfd75z4.execute-api.us-east-1.amazonaws.com/dev/login',
+        {
+          email,
+          password,
+        }
+      );
+      // Save JWT in cookies and redirect to home after successful login
+      if (response.data.statusCode === 200) {
+        const { jwt } = JSON.parse(response.data.body);
+        setCookie('authBearer', jwt, {
+          path: '/',
+          maxAge: 3600, // Expires after 1hr
+          sameSite: true,
+        });
+
+        showNotification({
+          message: 'Successfully logged in!',
+        });
+        //@ts-ignore
+        router.replace('/');
+      } else {
+        const message = response.data.body.match(/(?:"[^"]*"|^[^"]*$)/)[0].replace(/"/g, '');
+        showNotification({
+          message,
+        });
+      }
+    }
+  };
 
   return (
     <div style={{ height: '400px', width: '500px', margin: 'auto' }}>
       <Paper radius="md" p="xl" withBorder {...props}>
-        <Text size="lg" weight={500}>
-          Welcome to Mantine, {type} with
-        </Text>
-
-        {/* <Group grow mb="md" mt="md">
-          <GoogleButton radius="xl">Google</GoogleButton>
-          <FacebookButton radius="xl">Facebook</FacebookButton>
-          <GithubButton radius="xl">Github</GithubButton>
-        </Group> */}
-
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
-
-        <form onSubmit={form.onSubmit(() => {})}>
+        <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <Stack>
             {type === 'register' && (
               <TextInput
+                required
                 label="Name"
                 placeholder="Your name"
                 value={form.values.name}

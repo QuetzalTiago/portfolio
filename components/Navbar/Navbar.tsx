@@ -1,11 +1,20 @@
 /* eslint-disable linebreak-style */
 import React from 'react';
 
-import { createStyles, Menu, Center, Header, Container, Group, Burger, Image } from '@mantine/core';
+import {
+  createStyles,
+  Menu,
+  Center,
+  Header,
+  Container,
+  Group,
+  Burger,
+  Button,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown } from '@tabler/icons';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 const HEADER_HEIGHT = 60;
 
@@ -51,11 +60,24 @@ const useStyles = createStyles((theme) => ({
 
 interface HeaderActionProps {
   links: { link: string; label: string; links?: { link: string; label: string }[] }[];
+  user: any;
 }
 
-export default function Navbar({ links }: HeaderActionProps) {
+export default function Navbar({ links, user }: HeaderActionProps) {
   const { classes } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
+  const router = useRouter();
+
+  const rightSideButton = user?.userName ? (
+    <>
+      <p>{`Welcome, ${user?.userName}!`}</p>
+    </>
+  ) : (
+    <Button radius="xl" h={30} onClick={() => router.push('/auth')}>
+      Login or Sign up
+    </Button>
+  );
+
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
       <Menu.Item key={item.link}>{item.label}</Menu.Item>
@@ -94,7 +116,8 @@ export default function Navbar({ links }: HeaderActionProps) {
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
-        <ColorSchemeToggle />
+
+        {rightSideButton}
       </Container>
     </Header>
   );

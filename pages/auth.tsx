@@ -1,10 +1,10 @@
 import React from 'react';
 import { AuthForm } from '../components/AuthForm/AuthForm';
 
-export const login = () => (
+export const auth = () => (
   <div>
     <AuthForm />
   </div>
 );
 
-export default login;
+export default auth;

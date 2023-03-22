@@ -50,6 +50,10 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
                   link: '/projects',
                 },
                 {
+                  label: 'Blog',
+                  link: '/blog',
+                },
+                {
                   label: 'About',
                   link: '/about',
                 },

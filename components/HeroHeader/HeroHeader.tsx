@@ -104,10 +104,12 @@ export function HeroHeader() {
                 meet client requirements.
               </List.Item>
               <List.Item>
-                <b>Node.js</b> – React.js is my go-to JavaScript UI library, and I have been using
-                it consistently since I began working professionally. Its simplicity and flexibility
-                make it the best choice for creating dynamic and responsive user interfaces that
-                meet client requirements.
+                <b>Node.js</b> – Node.js is my preferred server-side runtime environment for
+                building scalable and high-performance web applications. Its event-driven
+                architecture and non-blocking I/O make it an excellent choice for building real-time
+                web applications, APIs, and microservices. Additionally, its vast ecosystem of
+                modules and packages makes it easy to integrate with other tools and technologies,
+                and its open-source nature ensures continuous improvement and innovation.
               </List.Item>
               <List.Item>
                 <b>AWS</b> – As for cloud computing, AWS is my platform of choice. With its vast

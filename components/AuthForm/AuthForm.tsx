@@ -58,7 +58,6 @@ export function AuthForm(props: PaperProps) {
           password,
         }
       );
-      console.log(response);
 
       // Redirect to home after successful registration
       if (response.data.statusCode === 200) {

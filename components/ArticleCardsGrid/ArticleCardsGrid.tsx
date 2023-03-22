@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio } from '@mantine/core';
-import Link from 'next/link';
 
 const mockdata = [
   {

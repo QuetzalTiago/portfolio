@@ -26,7 +26,7 @@ export default function BlogForm({ onSubmit }: BlogFormProps) {
         <Input
           placeholder="Enter title"
           value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(event: any) => setTitle(event.target.value)}
           required
         />
         <Space h="md" />
@@ -38,7 +38,7 @@ export default function BlogForm({ onSubmit }: BlogFormProps) {
           value={content}
           spellCheck
           minRows={5}
-          onChange={(event) => setContent(event.target.value)}
+          onChange={(event: any) => setContent(event.target.value)}
         />
 
         <Space h="md" />

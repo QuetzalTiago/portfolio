@@ -39,7 +39,7 @@ export function AuthForm(props: PaperProps) {
 
     validate: {
       name: (val) =>
-        type === 'register' && val.length
+        type === 'register' && val.length < 4
           ? 'Name is required and must include at least 4 characters'
           : null,
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
@@ -119,6 +119,9 @@ export function AuthForm(props: PaperProps) {
                 label="Name"
                 placeholder="Your name"
                 value={form.values.name}
+                error={
+                  form.errors.name && 'Name is required and must include at least 4 characters'
+                }
                 onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
                 radius="md"
               />

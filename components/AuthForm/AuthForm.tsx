@@ -39,7 +39,7 @@ export function AuthForm(props: PaperProps) {
 
     validate: {
       name: (val) =>
-        type === 'register' && val.length <= 4
+        type === 'register' && val.length
           ? 'Name is required and must include at least 4 characters'
           : null,
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),

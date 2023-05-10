@@ -80,8 +80,8 @@ export function HeroHeader() {
             </Text>
             <Text color="dimmed" mt="md">
               I am a skilled and experienced full-stack web developer, with a focus on delivering
-              innovative solutions to complex problems. With two years of experience in the field, I
-              have built a deep understanding of a wide range of technologies, from programming
+              innovative solutions to complex problems. With three years of experience in the field,
+              I have built a deep understanding of a wide range of technologies, from programming
               languages and frameworks to cloud-based services and beyond. Throughout my
               professional journey, I have had the opportunity to work with many different
               technologies, but my top three picks are:
